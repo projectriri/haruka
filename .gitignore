@@ -1,0 +1,5 @@
+*.db
+data
+.idea
+haruka
+nohup.out
