@@ -64,3 +64,16 @@ func sendMessage(cid ubm_api.CID, msg ubm_api.Message) {
 		},
 	})
 }
+
+func sendText(cid ubm_api.CID, text string)  {
+	msg := ubm_api.Message{
+		Type: "rich_text",
+		RichText: &ubm_api.RichText{
+			{
+				Type: "text",
+				Text: text,
+			},
+		},
+	}
+	sendMessage(cid, msg)
+}

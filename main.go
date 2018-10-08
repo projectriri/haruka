@@ -49,16 +49,7 @@ func main() {
 			if len(command.ArgsStr) == 0 {
 				continue
 			}
-			msg := ubm_api.Message{
-				Type: "rich_text",
-				RichText: &ubm_api.RichText{
-					{
-						Type: "text",
-						Text: command.ArgsStr,
-					},
-				},
-			}
-			sendMessage(command.Message.Chat.CID, msg)
+			sendText(command.Message.Chat.CID, command.ArgsStr)
 		case "haruka:sticker":
 			if len(command.ArgsTxt) == 0 {
 				continue
@@ -83,29 +74,11 @@ func main() {
 			}
 			sendMessage(command.Message.Chat.CID, msg)
 		case "haruka:hitokoto":
-			msg := ubm_api.Message{
-				Type: "rich_text",
-				RichText: &ubm_api.RichText{
-					{
-						Type: "text",
-						Text: formatHitokotoRespMsg(command.ArgsTxt),
-					},
-				},
-			}
-			sendMessage(command.Message.Chat.CID, msg)
+			sendText(command.Message.Chat.CID, formatHitokotoRespMsg(command.ArgsTxt))
 		case "ping":
 			fallthrough
 		case "haruka:ping":
-			msg := ubm_api.Message{
-				Type: "rich_text",
-				RichText: &ubm_api.RichText{
-					{
-						Type: "text",
-						Text: formatPingRespMsg(),
-					},
-				},
-			}
-			sendMessage(command.Message.Chat.CID, msg)
+			sendText(command.Message.Chat.CID, formatPingRespMsg())
 		}
 	}
 }
