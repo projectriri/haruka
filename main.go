@@ -32,8 +32,8 @@ func main() {
 				{
 					API:      "cmd",
 					Version:  "1.0",
-					Protocol: "",
 					Method:   "cmd",
+					Protocol: `{"command_prefix":["!!"],"response_mode":26}`,
 				},
 			},
 		},
@@ -45,12 +45,12 @@ func main() {
 		var command cmd.Command
 		json.Unmarshal(pkt.Body, &command)
 		switch command.CmdStr {
-		case "haruka:echo":
+		case "echo":
 			if len(command.ArgsStr) == 0 {
 				continue
 			}
 			sendText(command.Message.Chat.CID, command.ArgsStr)
-		case "haruka:sticker":
+		case "sticker":
 			if len(command.ArgsTxt) == 0 {
 				continue
 			}
@@ -73,12 +73,8 @@ func main() {
 				},
 			}
 			sendMessage(command.Message.Chat.CID, msg)
-		case "haruka:hitokoto":
+		case "hitokoto":
 			sendText(command.Message.Chat.CID, formatHitokotoRespMsg(command.ArgsTxt))
-		case "ping":
-			fallthrough
-		case "haruka:ping":
-			sendText(command.Message.Chat.CID, formatPingRespMsg())
 		}
 	}
 }

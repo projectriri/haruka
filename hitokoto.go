@@ -4,24 +4,7 @@ import (
 	"github.com/Wheeeel/todobot/hitoko"
 	"strings"
 	"math/rand"
-	"time"
 )
-
-func formatPingRespMsg() (msg string) {
-	msg = "春歌服务程序工作正常。\n"
-	ch := make(chan string, 1)
-	go func() {
-		ch <- one()
-		close(ch)
-	}()
-	select {
-	case <-time.After(time.Second):
-		msg += nya()
-	case m := <-ch:
-		msg += m
-	}
-	return
-}
 
 func formatHitokotoRespMsg(args []string) (msg string) {
 	if len(args) == 0 {
